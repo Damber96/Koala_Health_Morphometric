@@ -75,7 +75,7 @@ Age_plot <- ggplot(counts, aes(x = Age_yr, fill = Sex,
 ?geom_text
   
 # Export plot
-ggsave(filename = "./Output/Age_plot.jpg", plot = Age_plot, 
+ggsave(filename = "C:/Users/U8018879/OneDrive - USQ/InlandRail/Analysis&Writing/Morphometric&Health/Analysis/Output/Age_plot.jpg", plot = Age_plot, 
        height = 5.5, width = 4.5, dpi = 250)
 
 # ------------------------------------------------------------------------------
@@ -295,15 +295,16 @@ dat %>% group_by(Sex) %>% count(Chlamydia_PCR) %>% mutate(Percent = n / sum(n) *
 TreeSpecies <- dat %>% filter(!is.na(Tree_species)) %>%  
   count(Tree_species) %>% mutate(Percent = n / sum(n) * 100)
 
-Tree_plot <- ggplot(TreeSpecies, aes(x = Tree_species, y = n)) +
+Tree_plot <- ggplot(TreeSpecies, aes(x = reorder(Tree_species, -n), y = n)) +
   geom_bar(stat = "identity", fill = "grey", col = "gold") +
   xlab("Tree species") +
   ylab("Number of koalas") +
   geom_text(aes(label = paste0(sprintf("%.1f", Percent), "%"), y = n), vjust = -0.5, col = "black", size = 2.75) +
-theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 # Export plot
-ggsave(filename = "./Output/Tree_plot.jpg", plot = Tree_plot, 
+ggsave(filename = "C:/Users/U8018879/OneDrive - USQ/InlandRail/Analysis&Writing/Morphometric&Health/Analysis/Output/Tree_plot.jpg", 
+       plot = Tree_plot, 
        height = 5.5, width = 4.5, dpi = 200)
 
 # ------------------------------------------------------------------------------
